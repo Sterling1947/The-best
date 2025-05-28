@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نمونه کار [نام شما]</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #111827; /* Dark background */
+            color: #e5e7eb; /* Light text */
+        }
+        .hero-bg {
+            background-image: url('https://placehold.co/1920x1080/1f2937/374151?text=Hero+Background'); /* Placeholder - تصویر پس زمینه هیرو */
+            background-size: cover;
+            background-position: center;
+        }
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.75);
+        }
+        .modal-content {
+            max-height: 90vh;
+        }
+        /* Custom scrollbar for webkit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1f2937; /* scrollbar track color */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4b5563; /* scrollbar thumb color */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b7280; /* scrollbar thumb hover color */
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: #3b82f6; /* Accent color */
+            margin: 8px auto 0;
+        }
+        .portfolio-item img {
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #3b82f6; /* Accent color */
+            transition: width 0.3s ease-in-out;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .nav-link:hover {
+            color: #60a5fa; /* Lighter blue on hover */
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background-color: #4b5563;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #6b7280;
+            transform: translateY(-2px);
+        }
+    </style>
+    <script>
+        // Tailwind Customizations (Optional, if needed)
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6', // Blue
+                        secondary: '#10b981', // Green
+                        dark: '#111827', // Dark Gray
+                        light: '#e5e7eb', // Light Gray
+                    },
+                    fontFamily: {
+                        sans: ['Vazirmatn', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased">
+
+    <header id="header" class="bg-gray-900/80 backdrop-blur-md shadow-lg fixed w-full z-50 top-0 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white">لوگو شما</a>
+            <nav class="hidden md:flex space-x-reverse space-x-6 items-center">
+                <a href="#hero" class="nav-link text-gray-300 hover:text-primary">خانه</a>
+                <a href="#portfolio" class="nav-link text-gray-300 hover:text-primary">نمونه کارها</a>
+                <a href="#about" class="nav-link text-gray-300 hover:text-primary">درباره من</a>
+                <a href="#contact" class="nav-link text-gray-300 hover:text-primary">تماس</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-gray-300 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800">
+            <a href="#hero" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-700">خانه</a>
+            <a href="#portfolio" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-700">نمونه کارها</a>
+            <a href="#about" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-700">درباره من</a>
+            <a href="#contact" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-700">تماس</a>
+        </div>
+    </header>
+
+    <section id="hero" class="hero-bg min-h-screen flex items-center justify-center text-center pt-16">
+        <div class="bg-black bg-opacity-60 p-8 md:p-12 rounded-lg">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
+                [نام شما]
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8">
+                ویرایشگر حرفه‌ای ویدیو و طراح گرافیک
+            </p>
+            <a href="#portfolio" class="btn-primary text-white font-semibold py-3 px-8 rounded-lg text-lg shadow-xl">
+                مشاهده نمونه کارها <i class="fas fa-arrow-down ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-16 md:py-24 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-3xl md:text-4xl font-bold text-center text-white mb-12">نمونه کارهای من</h2>
+            
+            <div id="portfolio-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="portfolio-item-container bg-gray-700 rounded-lg shadow-xl overflow-hidden cursor-pointer" 
+                     data-image="https://placehold.co/1200x800/3b82f6/ffffff?text=Project+1+Large"
+                     data-video-embed=""
+                     data-title="پروژه شماره یک: ویرایش فیلم کوتاه"
+                     data-description="این یک فیلم کوتاه تبلیغاتی برای یک برند محلی بود. تمرکز بر روی ریتم سریع و جذابیت بصری بود. از نرم‌افزارهای Adobe Premiere Pro و After Effects استفاده شد."
+                     data-category="ویرایش ویدیو">
+                    <img src="https://placehold.co/600x400/3b82f6/ffffff?text=Project+1" alt="نمونه کار ویرایش ویدیو" class="w-full h-64 object-cover portfolio-item">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white mb-2">عنوان پروژه اول</h3>
+                        <p class="text-sm text-gray-400">ویرایش ویدیو</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item-container bg-gray-700 rounded-lg shadow-xl overflow-hidden cursor-pointer"
+                     data-image="https://placehold.co/1200x800/10b981/ffffff?text=Project+2+Large"
+                     data-video-embed=""
+                     data-title="پروژه شماره دو: طراحی پوستر"
+                     data-description="طراحی پوستر برای یک رویداد موسیقی. هدف ایجاد یک طرح چشم‌نواز و مدرن بود که با حال و هوای رویداد همخوانی داشته باشد. با استفاده از Adobe Photoshop و Illustrator."
+                     data-category="طراحی گرافیک">
+                    <img src="https://placehold.co/600x400/10b981/ffffff?text=Project+2" alt="نمونه کار طراحی گرافیک" class="w-full h-64 object-cover portfolio-item">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white mb-2">عنوان پروژه دوم</h3>
+                        <p class="text-sm text-gray-400">طراحی گرافیک</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item-container bg-gray-700 rounded-lg shadow-xl overflow-hidden cursor-pointer"
+                     data-image=""
+                     data-video-embed='<iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
+                     data-title="پروژه شماره سه: نمونه ویدیو از یوتیوب"
+                     data-description="این یک نمونه ویدیو از یوتیوب است که در مودال نمایش داده می‌شود. شما می‌توانید لینک امبد ویدیوهای خودتان را اینجا قرار دهید."
+                     data-category="ویدیو">
+                    <img src="https://placehold.co/600x400/8b5cf6/ffffff?text=Project+3+Video" alt="نمونه کار ویدیویی" class="w-full h-64 object-cover portfolio-item">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white mb-2">عنوان پروژه سوم (ویدیو)</h3>
+                        <p class="text-sm text-gray-400">ویدیو</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item-container bg-gray-700 rounded-lg shadow-xl overflow-hidden cursor-pointer" 
+                     data-image="https://placehold.co/1200x800/ef4444/ffffff?text=Project+4+Large"
+                     data-video-embed=""
+                     data-title="پروژه شماره چهار: روتوش عکس پرتره"
+                     data-description="روتوش حرفه‌ای عکس پرتره با تمرکز بر حفظ بافت طبیعی پوست و بهبود نور و رنگ. انجام شده با Adobe Photoshop."
+                     data-category="روتوش عکس">
+                    <img src="https://placehold.co/600x400/ef4444/ffffff?text=Project+4" alt="نمونه کار روتوش عکس" class="w-full h-64 object-cover portfolio-item">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white mb-2">عنوان پروژه چهارم</h3>
+                        <p class="text-sm text-gray-400">روتوش عکس</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item-container bg-gray-700 rounded-lg shadow-xl overflow-hidden cursor-pointer"
+                     data-image="YOUR_UPLOADED_IMAGE_URL_HERE" data-video-embed=""
+                     data-title="طراحی لوگو نئونی Gap"
+                     data-description="طراحی یک لوگوی مفهومی به سبک نئون برای برند Gap. تمرکز بر ایجاد حس مدرن و جذاب با استفاده از افکت‌های نوری."
+                     data-category="طراحی لوگو">
+                    <img src="YOUR_UPLOADED_THUMBNAIL_URL_HERE" alt="طراحی لوگو نئونی Gap" class="w-full h-64 object-cover portfolio-item"> <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white mb-2">لوگو نئونی Gap</h3>
+                        <p class="text-sm text-gray-400">طراحی لوگو</p>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-16 md:py-24 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-3xl md:text-4xl font-bold text-center text-white mb-12">درباره من</h2>
+            <div class="flex flex-col md:flex-row items-center md:space-x-reverse md:space-x-12">
+                <div class="md:w-1/3 mb-8 md:mb-0">
+                    <img src="https://placehold.co/400x400/4b5563/e5e7eb?text=Your+Photo" alt="عکس شما" class="rounded-full shadow-xl mx-auto w-64 h-64 md:w-full md:h-auto object-cover">
+                </div>
+                <div class="md:w-2/3 text-center md:text-right">
+                    <h3 class="text-2xl font-semibold text-white mb-4">سلام، من [نام شما] هستم</h3>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        من یک ویرایشگر ویدیو و طراح گرافیک خلاق و با انگیزه هستم با [تعداد] سال تجربه در خلق محتوای بصری جذاب. علاقه زیادی به داستان‌سرایی از طریق تصاویر و ویدیوها دارم و همیشه به دنبال یادگیری تکنیک‌های جدید هستم.
+                    </p>
+                    <p class="text-gray-300 leading-relaxed mb-6">
+                        مهارت‌های کلیدی من شامل کار با نرم‌افزارهای Adobe Creative Suite (Premiere Pro, After Effects, Photoshop, Illustrator)، درک عمیق از تئوری رنگ، ترکیب‌بندی و تدوین است. هدف من ارائه کارهایی است که نه تنها زیبا باشند، بلکه پیام مورد نظر را به بهترین شکل منتقل کنند.
+                    </p>
+                    <div class="space-x-reverse space-x-4">
+                        <a href="#contact" class="btn-primary text-white font-semibold py-2 px-6 rounded-lg">تماس با من</a>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-16 md:py-24 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-3xl md:text-4xl font-bold text-center text-white mb-12">تماس با من</h2>
+            <div class="max-w-2xl mx-auto text-center">
+                <p class="text-gray-300 leading-relaxed mb-8">
+                    علاقه‌مند به همکاری با شما هستم! اگر پروژه‌ای در ذهن دارید یا می‌خواهید بیشتر درباره کارهای من بدانید، لطفاً از طریق راه‌های زیر با من در تماس باشید.
+                </p>
+                <div class="flex justify-center space-x-reverse space-x-6 mb-8">
+                    <a href="mailto:your.email@example.com" class="text-gray-400 hover:text-primary text-3xl transition-colors duration-300"><i class="fas fa-envelope"></i></a>
+                    <a href="https://instagram.com/yourusername" target="_blank" class="text-gray-400 hover:text-primary text-3xl transition-colors duration-300"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com/in/yourusername" target="_blank" class="text-gray-400 hover:text-primary text-3xl transition-colors duration-300"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://t.me/yourusername" target="_blank" class="text-gray-400 hover:text-primary text-3xl transition-colors duration-300"><i class="fab fa-telegram"></i></a>
+                </div>
+                <p class="text-gray-400">یا فرم زیر را پر کنید (این فرم نمایشی است و کار نمی‌کند):</p>
+                 <form class="mt-6 space-y-4">
+                    <div>
+                        <input type="text" placeholder="نام شما" class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-primary focus:ring-primary outline-none">
+                    </div>
+                    <div>
+                        <input type="email" placeholder="ایمیل شما" class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-primary focus:ring-primary outline-none">
+                    </div>
+                    <div>
+                        <textarea placeholder="پیام شما" rows="4" class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-primary focus:ring-primary outline-none"></textarea>
+                    </div>
+                    <button type="button" class="btn-primary text-white font-semibold py-3 px-8 rounded-lg w-full md:w-auto">ارسال پیام (نمایشی)</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 py-8 text-center">
+        <p class="text-gray-400">© <span id="currentYear"></span> تمام حقوق برای [نام شما] محفوظ است.</p>
+        <p class="text-xs text-gray-500 mt-1">طراحی شده با <i class="fas fa-heart text-red-500"></i> و Tailwind CSS</p>
+    </footer>
+
+    <div id="portfolio-modal" class="fixed inset-0 modal-backdrop items-center justify-center p-4 hidden z-[100]">
+        <div class="modal-content bg-gray-800 rounded-lg shadow-2xl w-full max-w-3xl mx-auto overflow-y-auto p-6 relative">
+            <button id="close-modal-button" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl z-10">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="modal-body-content" class="relative">
+                <div id="modal-image-container" class="mb-4">
+                    <img id="modal-image" src="" alt="نمونه کار بزرگ" class="rounded-lg max-w-full h-auto mx-auto max-h-[60vh] object-contain">
+                </div>
+                 <div id="modal-video-container" class="mb-4 aspect-video">
+                    </div>
+                <h3 id="modal-title" class="text-2xl font-semibold text-white mb-2"></h3>
+                <p id="modal-category" class="text-sm text-primary mb-4"></p>
+                <p id="modal-description" class="text-gray-300 leading-relaxed"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = menuButton.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+
+            // Close mobile menu when a link is clicked
+            const mobileNavLinks = mobileMenu.querySelectorAll('a');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuButton.querySelector('i').classList.add('fa-bars');
+                    menuButton.querySelector('i').classList.remove('fa-times');
+                });
+            });
+
+            // Smooth scrolling for anchor links & header offset
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerOffset = document.getElementById('header').offsetHeight;
+                        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        const offsetPosition = elementPosition - headerOffset;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
+                        });
+                    }
+                });
+            });
+            
+            // Dynamic year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Portfolio Modal Logic
+            const portfolioItems = document.querySelectorAll('.portfolio-item-container');
+            const modal = document.getElementById('portfolio-modal');
+            const closeModalButton = document.getElementById('close-modal-button');
+            const modalImage = document.getElementById('modal-image');
+            const modalImageContainer = document.getElementById('modal-image-container');
+            const modalVideoContainer = document.getElementById('modal-video-container');
+            const modalTitle = document.getElementById('modal-title');
+            const modalCategory = document.getElementById('modal-category');
+            const modalDescription = document.getElementById('modal-description');
+
+            portfolioItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const imageSrc = item.dataset.image;
+                    const videoEmbed = item.dataset.videoEmbed;
+                    const title = item.dataset.title;
+                    const description = item.dataset.description;
+                    const category = item.dataset.category;
+
+                    modalTitle.textContent = title;
+                    modalCategory.textContent = category;
+                    modalDescription.textContent = description;
+
+                    if (videoEmbed) {
+                        modalImageContainer.style.display = 'none';
+                        modalVideoContainer.style.display = 'block';
+                        modalVideoContainer.innerHTML = videoEmbed;
+                         // Adjust iframe for responsiveness
+                        const iframe = modalVideoContainer.querySelector('iframe');
+                        if (iframe) {
+                            iframe.style.position = 'absolute';
+                            iframe.style.top = '0';
+                            iframe.style.left = '0';
+                            iframe.style.width = '100%';
+                            iframe.style.height = '100%';
+                        }
+                    } else if (imageSrc) {
+                        modalVideoContainer.style.display = 'none';
+                        modalVideoContainer.innerHTML = ''; // Clear any previous video
+                        modalImageContainer.style.display = 'block';
+                        modalImage.src = imageSrc;
+                        modalImage.alt = title; // Set alt text for accessibility
+                    }
+
+
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex'); // Use flex to center content
+                    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                });
+            });
+
+            const closeModal = () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = 'auto'; // Restore scrolling
+                // Stop video if playing
+                modalVideoContainer.innerHTML = ''; 
+            }
+
+            closeModalButton.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                // Close if clicked on backdrop (outside modal-content)
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            // Close modal with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === "Escape" && !modal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+
+            // Shrink header on scroll
+            const header = document.getElementById('header');
+            window.onscroll = function() {
+                if (window.pageYOffset > 50) {
+                    header.classList.add('py-2');
+                    header.classList.remove('py-4');
+                    header.classList.add('bg-gray-900'); // Ensure solid bg on scroll
+                    header.classList.remove('bg-gray-900/80');
+                } else {
+                    header.classList.add('py-4');
+                    header.classList.remove('py-2');
+                    header.classList.add('bg-gray-900/80');
+                    header.classList.remove('bg-gray-900');
+                }
+            };
+        });
+    </script>
+</body>
+</html>
